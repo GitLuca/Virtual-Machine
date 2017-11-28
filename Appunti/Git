@@ -1,4 +1,4 @@
-Penso che ora basti fare un git clone
+Penso che ora basti fare un git clone dalla nuova macchina
 poi git add dei file
 git commit (-m per i messaggi)
 poi git push origin master
