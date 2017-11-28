@@ -8,3 +8,11 @@ Bandit 10
 
 Bandit 11 IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR
 Bandit 12 5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu	
+[https://www.reddit.com/r/HowToHack/comments/2tizto/extracting_a_password_from_a_hex_dump_file/]
+
+gzip zcat 
+bzip2 bzcat 
+i cat aprono direttamente il file in output, posso usare [$ cat "nomefile" | file - ] per vedere che file 
+è il risultato senza stamparlo
+
+Bandit 13 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
