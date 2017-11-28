@@ -1,0 +1,4 @@
+Penso che ora basti fare un git clone
+poi git add dei file
+git commit (-m per i messaggi)
+poi git push origin master
