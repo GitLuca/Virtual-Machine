@@ -1,0 +1,11 @@
+total 96
+drwxr-xr-x  10 root root  4096 feb 15  2017 .
+drwxr-xr-x  23 root root  4096 mar  1  2017 ..
+drwxr-xr-x   2 root root 45056 mar  1  2017 bin
+drwxr-xr-x   2 root root  4096 feb 15  2017 games
+drwxr-xr-x  41 root root  4096 mar  1  2017 include
+drwxr-xr-x 121 root root  4096 mar  1  2017 lib
+drwxr-xr-x  10 root root  4096 feb 15  2017 local
+drwxr-xr-x   2 root root 12288 mar  1  2017 sbin
+drwxr-xr-x 260 root root 12288 mar  1  2017 share
+drwxr-xr-x   6 root root  4096 mar  1  2017 src

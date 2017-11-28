@@ -1,0 +1,9 @@
+g++ -o 00_bad.exe 00_bad_things.c 
+	compila con il nome 00_bad.exe il file 00_bad eccc
+./00_bad.exe
+	lo lancia
+
+
+
+gcc -pthread -o Prova.exe Prova.c
+	include la libreria?

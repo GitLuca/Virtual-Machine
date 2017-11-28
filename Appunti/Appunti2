@@ -1,0 +1,30 @@
+split --bytes=10000 boeing1.jpg 
+	posso spezzettare un file in pezzi di 10000 byte
+diff boeing1.jpg xaa 
+	mi dice se sono diversi o no, se non dice nulla sono uguali
+cat xaa xab (...) > new-boeing
+	posso unire i file, anche quelli che ho separato prima con split, in
+	questo caso in un file chiamato new-boeing, uguale all'originale
+
+cat x* > newhdhd
+	concatena tutti i file che inizano con x, ma possono entrare altri file
+cat x?? > newfad 
+	solo con due caratteri dopo la x
+ctrl+D 
+	fine file (per esempio interrompo l'immissione dell'input
+	sul prompt)
+cat > readme.txt
+	quello che scriverò andrà sul file di testo
+   | pipeline
+ls -la /usr | less
+	posso usare la visualizzazione "less" per vedere il contenuto della cartella
+	/usr
+ls -c /usr/bin | sort | less
+	sort mi ordina i risultato, con less posso navigarci comodamente 
+tee 
+	prende n ingresso un file e li butta fuori sia sullo standard output
+grep zip
+	filtra i dati 
+ ls /usr/bin | grep zip
+	fa vedere tutti i file che hanno zip nel nome
+
