@@ -16,3 +16,11 @@ i cat aprono direttamente il file in output, posso usare [$ cat "nomefile" | fil
 è il risultato senza stamparlo
 
 Bandit 13 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
+
+Bandit 14 -> bisgna copiare il file sul desktop in un txt, poi cambiare i permessi (chmod 600 file.txt) 
+e poi fare il login nel server con il comando -i file.txt aggiunto
+https://support.rackspace.com/how-to/logging-in-with-an-ssh-private-key-on-linuxmac/ 
+
+(4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e)
+
+Bandit 15 BfMYroe26WYalil77FoDi9qh59eK5xNr
