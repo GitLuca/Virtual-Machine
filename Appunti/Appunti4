@@ -1,0 +1,23 @@
+ps 
+	processi in esecuzione da questo terminale
+which ps (man, ls, ecc)
+	dov'è il comando
+ps -aux
+	tutti i processi
+
+ese2
+	getppid() prende il nome del processo che ha generato quello di "mine", cioè quello scritto. 
+	se lo lancio con il terminale, allora ID sarà quello della bash
+
+02
+	devo mettere in argomento un comando e lui lo esegue
+03
+	dopo una fork posso riconoscere se il processo è padre o figlio se 
+	child_pid != 0 allora è il padre 
+	wait (&child_status) aspetta che il bool sia falso, cioè che muoia il figlio
+	child_pid = 0 allora è il figlio 
+	
+chmod cambia autorizzazione dei file
+	chmod o-r "nomefile" impedisce a chiunque tranne l'owner di read il file
+	chmod g-w "nome" impedisce la scrittura 
+
