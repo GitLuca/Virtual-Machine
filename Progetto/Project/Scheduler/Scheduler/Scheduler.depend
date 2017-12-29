@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1514557506 source:/home/student/Main/SharedMachine/Virtual-Machine/Progetto/Project/Scheduler/Scheduler/Master.c
+
+1514557980 source:/home/student/Main/SharedMachine/Virtual-Machine/Progetto/Project/Scheduler/Scheduler/Main.c
+	<getopt.h>
+	<stdio.h>
+	<stdlib.h>
+	<sysexits.h>
+	<unistd.h>
+	<string.h>
+
