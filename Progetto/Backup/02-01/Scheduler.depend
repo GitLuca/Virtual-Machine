@@ -1,0 +1,42 @@
+# depslib dependency file v1.0
+1514557506 source:/home/student/Main/SharedMachine/Virtual-Machine/Progetto/Project/Scheduler/Scheduler/Master.c
+
+1514557980 source:/home/student/Main/SharedMachine/Virtual-Machine/Progetto/Project/Scheduler/Scheduler/Main.c
+	<getopt.h>
+	<stdio.h>
+	<stdlib.h>
+	<sysexits.h>
+	<unistd.h>
+	<string.h>
+
+1514564181 source:/home/student/Public/Virtual-Machine/Progetto/Project/Scheduler/Scheduler/Master.c
+
+1514710866 source:/home/student/Public/Virtual-Machine/Progetto/Project/Scheduler/Scheduler/Main.c
+	<getopt.h>
+	<stdio.h>
+	<stdlib.h>
+	<sys/types.h>
+	<sys/wait.h>
+	<sysexits.h>
+	<unistd.h>
+	<string.h>
+	"Job.h"
+
+1514712000 /home/student/Public/Virtual-Machine/Progetto/Project/Scheduler/Scheduler/Job.h
+
+1514712025 /home/student/Public/Virtual-Machine/Progetto/Project/Scheduler/Scheduler/Processes.h
+	"Job.h"
+
+1514653568 source:/home/student/Public/Virtual-Machine/Progetto/Project/Scheduler/Scheduler/Preemptive.c
+	"Job.h"
+	"Processes.h"
+	<pthread.h>
+
+1514905812 source:/home/student/Public/Virtual-Machine/Progetto/Project/Scheduler/Scheduler/Not_Preemptive.c
+	<pthread.h>
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	<stdbool.h>
+	"Job.h"
+
