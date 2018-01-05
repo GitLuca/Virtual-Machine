@@ -4,6 +4,6 @@
 #define TEST_H__
 
 void scheduler_preemptive(Job* job, int quantum);
-void scheduler_not_preemptive(Job* jobs);
+void scheduler_not_preemptive(Job* jobs, int jobCount);
 
 #endif /* TEST_H__*/

@@ -25,13 +25,14 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
-					<Add option="-g" />
 				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add option="-g" />
 		</Compiler>
 		<Unit filename="../../01.dat" />
 		<Unit filename="Job.h" />

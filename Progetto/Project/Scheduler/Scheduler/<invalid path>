@@ -2,52 +2,35 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="Scheduler" />
+		<Option title="Prova" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/Scheduler" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Debug/Prova" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
-				<Linker>
-					<Add library="pthread" />
-				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/Scheduler" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Release/Prova" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
-					<Add option="-g" />
 				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add option="-g" />
 		</Compiler>
-		<Unit filename="../../01.dat" />
-		<Unit filename="Job.h" />
-		<Unit filename="Main.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Master.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Not_Preemptive.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Preemptive.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="Processes.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

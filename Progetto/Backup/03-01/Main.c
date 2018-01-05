@@ -124,8 +124,10 @@ int master(){
                 if( isJ != NULL){
 
                     if(k != -1){
-                         jobs[k].numbOfInstr = h;
-                         calculateLenght(&jobs[k]);
+                        printf("Job NUMERO: %d\n",k);
+                        jobs[k].numbOfInstr = h -1;
+                        calculateLenght(&jobs[k]);
+                         //printf( "Job number %d  has IstrNumb %d\n", k, jobs[k].numbOfInstr);
                     }
                     /**NUOVO JOB**/
                     h = 0; //riazzero il numero delle istruzione per un nuovo j
@@ -140,7 +142,9 @@ int master(){
                     //Arrival time
                     token = strtok(NULL, s);
                     jobs[k].arrival_time = atoi(token);
-                    /**printf( "Job number %d with id %d and arrival time %d \n", k, jobs[k].id, jobs[k].arrival_time);**/
+                    //all'inizio setto instrDone a 0
+                    jobs[k].instrDone = 0;
+                    printf( "Job number %d with id %d and arrival time %d \n", k, jobs[k].id, jobs[k].arrival_time);
 
                 }else{
 
@@ -157,18 +161,20 @@ int master(){
                     //IO_MAX
                     token = strtok(NULL, s);
                     jobs[k].instr[h].io_max = atoi(token);
-                    //printf( "Istruction number %d with type flag %d,lenght %d and I/O max %d \n", h, jobs[k].instr[h].type_flag, jobs[k].instr[h].lenght, jobs[k].instr[h].io_max );
+                    printf( "Istruction number %d with type flag %d,lenght %d and I/O max %d \n", h, jobs[k].instr[h].type_flag, jobs[k].instr[h].lenght, jobs[k].instr[h].io_max );
                 }
                 h++;
                 //controllo per l'ultimo job che non ha una j dopo
                 if(i == (counter -1)){
-                    jobs[k].numbOfInstr = h;
+                    jobs[k].numbOfInstr = h-1;
+                    //printf( "Job number %d  has IstrNumb %d\n", k, jobs[k].numbOfInstr);
                     calculateLenght(&jobs[k]);
                 }
 
             }
+
             /**ora si passano i job agli scheduler**/
-            scheduler_not_preemptive(&jobs, jobCount);
+            scheduler_not_preemptive(jobs, jobCount);
             //printf("Numero jobs: %d",jobCount);
             exit(EX_OSERR);
         }
@@ -180,6 +186,7 @@ int master(){
     int count;
     for (int i = 0; i < max; i++){
         count += (*job).instr[i].lenght;
+        printf( "LALALA ISTRUCTION number %d with type flag %d,lenght %d and I/O max %d \n", i,  (*job).instr[i].type_flag,  (*job).instr[i].lenght,  (*job).instr[i].io_max );
     }
     (*job).totalLeght = count;
     //printf("Lunghezza istruzioni del job %d è: %d\n",(*job).id,(*job).totalLeght);

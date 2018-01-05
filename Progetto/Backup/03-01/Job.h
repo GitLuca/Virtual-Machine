@@ -1,5 +1,5 @@
-#ifndef TEST_H__
-#define TEST_H__
+#ifndef JOB_H
+#define JOB_H
 
 
 typedef enum {READY, RUNNING, BLOCKED, EXIT} state;
@@ -17,11 +17,12 @@ typedef struct {
     state pState;
     int  totalLeght;
     int numbOfInstr;
+    int instrDone; //l'ultima istruzione completata (per salvare quelle bloccanti)
 }Job;
 
 void scheduler_preemptive(Job* job, int quantum);
 void scheduler_not_preemptive(Job* jobs, int jobCount);
 
-#endif /* TEST_H__*/
+#endif /* JOB_H*/
 
 
