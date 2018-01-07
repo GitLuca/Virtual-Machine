@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdbool.h>
-
+#include <string.h>
 #include "Job.h"
 //#include "Processes.h"
 
@@ -15,9 +15,10 @@ typedef struct {
 }args;
 
 void scheduler_not_preemptive(Job *jobs, int jobCount);
-void sort (Job *readyJob, int size);
+//void sort (Job *readyJob, int size);
+int sort (const void *s1, const void *s2);
 void* core (void* parameters);
-
+void clean_job(Job *jobs, int pos, int JobCount);
 int rand_lim(int limit);
 
 /**
@@ -35,7 +36,7 @@ pthread_mutex_t lock4;
 
 
 /**shortest job next**/
-void scheduler_not_preemptive(Job *jobs, int jobCount){
+void scheduler_not_preemptive(Job *origJobs, int jobCount){
 
     int clock1 = 0;
     int clock2 = 0;
@@ -44,6 +45,10 @@ void scheduler_not_preemptive(Job *jobs, int jobCount){
     //args thread2_args;
     printf("JOBCOUNT %d\n", jobCount);
 
+    Job jobs[jobCount];
+    for(int ii =0; ii< jobCount; ii++){
+        jobs[ii] = origJobs[ii];
+    }
 
     /**inizializza il MUTEX che mi servirà per il jobdone++**/
     if (pthread_mutex_init(&lock1, NULL) != 0)
@@ -67,60 +72,73 @@ void scheduler_not_preemptive(Job *jobs, int jobCount){
     }
     core_status[0]=0;
     core_status[1]=0;
-    /*printf("\n *****************************************\n");
-    sort(jobs, jobCount);
-     for(int i1=0; i1<jobCount; i1++){
-        printf("job numero:%d cxon numero istruzioni %d, pState %d e lunghezza %d IStrDone %d\n", jobs[i1].id, jobs[i1].numbOfInstr,jobs[i1].pState, jobs[i1].totalLeght,jobs[i1].instrDone);
-        for(int i2 = 0; i2 < jobs[i1].numbOfInstr; i2++ ){
-             printf("istruzione numero:%d con type_flag %d, lunghezza %d e io_max %d \n", i2, jobs[i1].instr[i2].type_flag,jobs[i1].instr[i2].lenght,jobs[i1].instr[i2].io_max);
-        }
-    }*/
 
-    for(int c = 0; c<jobCount; c++){
+    //sort(jobs, jobCount);
+     for(int c = 0; c<jobCount; c++){
             jobs[c].pState = READY;
         }
-        sort(jobs, jobCount);
+     for(int i1=0; i1<jobCount; i1++){
+        printf("job numero: %d con numero istruzioni %d, pState %d e lunghezza %d totalLeght %d\n", jobs[i1].id, jobs[i1].numbOfInstr,jobs[i1].pState, jobs[i1].totalLeght,jobs[i1].totalLeght);
+        for(int i2 = 0; i2 < jobs[i1].numbOfInstr; i2++ ){
+             printf("istruzione numero: %d con type_flag %d, lunghezza %d e io_max %d \n", i2, jobs[i1].instr[i2].type_flag,jobs[i1].instr[i2].lenght,jobs[i1].instr[i2].io_max);
+        }
+    }
+    //qsort(jobs, jobCount, sizeof(Job), sort);
+
 
 /*******************************************************************************************************/
-    while(jobDone < jobCount){
+    while(jobDone < jobCount ){
 
-        for (int i = 0; i<jobCount; i++){
+        //printf("JOBDONE %d\n", clock1 );
+
+        for (int i = 0; i < jobCount; i++){
+
+            /*if(jobs[i].pState == EXIT){
+                pthread_mutex_lock(&lock1);
+                clean_job(jobs, i, jobCount);
+
+                pthread_mutex_unlock(&lock1);
+
+            }*/
             //printf("CORE1 %d\n", core_status[0]);
             //printf("CORE222222222222222222222222222222 %d\n", core_status[1]);
 
             //fprintf(stderr,"Ciclo for %d\n", i);
-            if(core_status[0] == 0  && jobs[i].pState == READY){
+            if(core_status[0] == 0  && jobs[i].pState == READY && clock1 > jobs[i].arrival_time){
 
                 /**metto argomenti**/
 
-                pthread_mutex_lock(&lock2);
-                jobs[i].pState = RUNNING;
+                core_status[0] = 1;
+
                 thread_args[0].job = jobs[i];
                 thread_args[0].clock = clock1;
                 thread_args[0].core = 0;
-                core_status[0] = 1;
+                jobs[i].pState = RUNNING;
 
-                pthread_mutex_unlock(&lock2);
-
-                printf("Numero %d va verso il core %d\n", thread_args[0].job.id, thread_args[0].core);
+                fprintf(stderr, "Numero %d VA verso il core %d (%d e numbOfInstr %d)\n", thread_args[0].job.id, thread_args[0].core, thread_args[0].job.pState, thread_args[0].job.numbOfInstr);
                 //printf("Job %d ha pState %d\n", i ,jobs[i].pState);
-                pthread_create (&thread[0], NULL, &core, (void*)&thread_args[0]);
+                pthread_create (&thread[0], NULL, &core, &thread_args[0]);
 
-            }else if(core_status[1] == 0  && jobs[i].pState == READY){
+            }else if(core_status[1] == 0  && jobs[i].pState == READY && clock2 > jobs[i].arrival_time){
 
 
                 /**metto argomenti**/
-                 pthread_mutex_lock(&lock2);
-                jobs[i].pState = RUNNING;
+
+                core_status[1] = 1;
+
                 thread_args[1].job = jobs[i];
                 thread_args[1].clock = clock2;
                 thread_args[1].core = 1;
-                core_status[1] = 1;
-                pthread_mutex_unlock(&lock2);
+                jobs[i].pState = RUNNING;
 
-                printf("Numero %d va verso il core %d\n", thread_args[1].job.id, thread_args[1].core);
+
+                printf("Numero %d VA verso il core %d (pState %d e numbOfInstr %d)\n", thread_args[1].job.id, thread_args[1].core, thread_args[0].job.pState, thread_args[0].job.numbOfInstr);
                 //printf("Job %d ha pState %d\n", i ,jobs[i].pState);
-                pthread_create (&thread[1], NULL, &core, (void*)&thread_args[1]);
+                pthread_create (&thread[1], NULL, &core, &thread_args[1]);
+            }else{
+                //printf("Finito qua\n");
+                //TODO perchè finisce qua??
+                //printf("JOBDONE %d\n", jobs[5].pState );
             }
 
             /**devo far si che i thread abbiano delle variabili run, ready, done**/
@@ -140,16 +158,18 @@ void scheduler_not_preemptive(Job *jobs, int jobCount){
 
             printf("CORE 0 ha lasciato il JOB %d ha pState %d e istrDone %d\n", thread_args[0].job.id, jobs[thread_args[0].job.id].pState, jobs[thread_args[0].job.id].instrDone);
             if(thread_args[0].job.pState == BLOCKED ){
-                printf("job %d MESSO IN READY \n", thread_args[0].job.id);
+                printf("job %d messo in READY \n", thread_args[0].job.id);
                 jobs[thread_args[0].job.id].pState = READY;
-                thread_args[0].job.pState = READY;
+                //thread_args[0].job.pState = READY;
 
             }
+            ///thread_args[0].job.id = NULL;
             pthread_mutex_unlock(&lock3);
 
 
         }
          if(core_status[1] == 2){
+
             pthread_mutex_lock(&lock4);
             pthread_join (thread[1], NULL);
             core_status[1] = 0;
@@ -159,13 +179,15 @@ void scheduler_not_preemptive(Job *jobs, int jobCount){
 
             printf("CORE 1 ha lasciato il JOB %d ha pState %d e istrDone %d\n", jobs[thread_args[1].job.id].id, jobs[thread_args[1].job.id].pState, jobs[thread_args[1].job.id].instrDone);
              if(thread_args[1].job.pState == BLOCKED ){
-                printf("job %d MESSO IN READY\n", thread_args[1].job.id);
-                thread_args[1].job.pState = READY;
-                jobs[thread_args[0].job.id].pState = READY;
+                printf("job %d messo in READY\n", thread_args[1].job.id);
+                //thread_args[1].job.pState = READY;
+                jobs[thread_args[1].job.id].pState = READY;
             }
+
             pthread_mutex_unlock(&lock4);
         }
-
+    clock1++;
+    clock2++;
 
 
     }
@@ -250,12 +272,12 @@ void* core (void* parameters){
     /**Completa job con mutex e status del core**/
     core_status[coreNumb] = 2;
 
-    pthread_exit(NULL);
+    //pthread_exit(NULL);
+    return NULL;
 
 }
 
-
-void sort (Job *readyJob, int size){
+/*void sort (Job *readyJob, int size){
 
     int i,j;
     Job temp;
@@ -271,6 +293,37 @@ void sort (Job *readyJob, int size){
             }
         }
     }
+}*/
+int sort (const void *s1, const void *s2){
+
+    Job *j1 = (Job *)s1;
+    Job *j2 = (Job *)s2;
+    //int leghtcompare = strcmp(j1->totalLeght, j2->totalLeght);
+    int leghtcompare=0;
+    if(j1->totalLeght < j2->totalLeght){
+        leghtcompare = -1;
+    }else if(j1->totalLeght > j2->totalLeght){
+        leghtcompare = 1;
+    }else if (j1->totalLeght == j2->totalLeght){
+        return j1->id - j2->id;
+    }
+
+    return leghtcompare;
+
+    /*int i,j;
+    Job temp;
+    for(i=0; i<size; i++){
+
+        for(j=i+1; j<size; j++){
+
+            if(readyJob[i].totalLeght > readyJob[j].totalLeght){
+
+                temp = readyJob[i];
+                readyJob[i] = readyJob[j];
+                readyJob[j] = temp;
+            }
+        }
+    }*/
 }
 
 int rand_lim(int limit) {
@@ -286,4 +339,10 @@ int rand_lim(int limit) {
     } while (retval > limit);
     retval++;
     return retval;
+}
+
+void clean_job(Job *jobs, int pos, int JobCount){
+
+    memmove(&jobs[pos], &jobs[pos+1], (JobCount-pos-1)*sizeof(*jobs));
+
 }

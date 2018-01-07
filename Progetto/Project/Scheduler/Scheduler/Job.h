@@ -20,7 +20,7 @@ typedef struct {
     int instrDone; //l'ultima istruzione completata (per salvare quelle bloccanti)
 }Job;
 
-void scheduler_preemptive(Job* job, int quantum);
+void scheduler_preemptive(Job* job, int quantum, int JobCount);
 void scheduler_not_preemptive(Job* jobs, int jobCount);
 
 #endif /* JOB_H*/

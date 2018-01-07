@@ -144,7 +144,7 @@ int master(){
                     jobs[k].arrival_time = atoi(token);
                     //all'inizio setto instrDone a 0
                     jobs[k].instrDone = 0;
-                    //printf( "Job number %d with id %d and arrival time %d \n", k, jobs[k].id, jobs[k].arrival_time);
+                    //printf( "Job number %d with id %d and arrival time %d\n", k, jobs[k].id, jobs[k].arrival_time);
 
                 }else{
 

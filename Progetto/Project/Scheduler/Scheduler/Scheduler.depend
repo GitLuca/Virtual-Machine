@@ -11,7 +11,7 @@
 
 1514564181 source:/home/student/Public/Virtual-Machine/Progetto/Project/Scheduler/Scheduler/Master.c
 
-1514993421 source:/home/student/Public/Virtual-Machine/Progetto/Project/Scheduler/Scheduler/Main.c
+1515261941 source:/home/student/Public/Virtual-Machine/Progetto/Project/Scheduler/Scheduler/Main.c
 	<getopt.h>
 	<stdio.h>
 	<stdlib.h>
@@ -22,21 +22,21 @@
 	<string.h>
 	"Job.h"
 
-1514974516 /home/student/Public/Virtual-Machine/Progetto/Project/Scheduler/Scheduler/Job.h
+1515347349 /home/student/Public/Virtual-Machine/Progetto/Project/Scheduler/Scheduler/Job.h
 
 1514712025 /home/student/Public/Virtual-Machine/Progetto/Project/Scheduler/Scheduler/Processes.h
 	"Job.h"
 
-1514653568 source:/home/student/Public/Virtual-Machine/Progetto/Project/Scheduler/Scheduler/Preemptive.c
+1515347349 source:/home/student/Public/Virtual-Machine/Progetto/Project/Scheduler/Scheduler/Preemptive.c
 	"Job.h"
-	"Processes.h"
 	<pthread.h>
 
-1515171486 source:/home/student/Public/Virtual-Machine/Progetto/Project/Scheduler/Scheduler/Not_Preemptive.c
+1515348008 source:/home/student/Public/Virtual-Machine/Progetto/Project/Scheduler/Scheduler/Not_Preemptive.c
 	<pthread.h>
 	<stdio.h>
 	<stdlib.h>
 	<unistd.h>
 	<stdbool.h>
+	<string.h>
 	"Job.h"
 
